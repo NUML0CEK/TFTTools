@@ -14,7 +14,6 @@ class Champion {
     getRarity () {
         return RARITY.get(this.tierLvl);
     }
-
 }
 
 module.exports = Champion;

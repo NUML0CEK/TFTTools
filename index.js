@@ -7,7 +7,14 @@ const RARITY = require('./config/rarity');
 // myPool.setChampionPoolCount("Maokai", 1);
 // myPool.printPool();
 // myPool.printUnits();
+
 let myShop = new Shop();
+myShop.changeLevel(10);
+const roll = myShop.getRoll();
+for ([champion, _, _] of roll) {
+    console.log(champion);
+}
+
 
 // for ( let i = 0; i < 11; i++ ) {
 //     console.log('LEVEL', i+1);
@@ -25,15 +32,3 @@ let myShop = new Shop();
 
 // console.log()
 // console.log(myShop.changeLevel())
-
-
-let counter = 0;
-let generateNumber = 100000;
-let percentage = 50;
-myShop.changeLevel(11);
-for (let i = 0; i < generateNumber; i++) {
-    if (myShop.generateTierLvl() === 4) {
-        counter++;
-    }
-}
-console.log('expected:', generateNumber/(100/percentage), 'real:', counter);

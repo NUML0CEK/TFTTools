@@ -2,17 +2,13 @@ const Champion = require('./champion');
 const ChampionUnit = require('./championUnit');
 const POOL_SIZES = require('../config/poolSizes');
 const CHAMPION_NAMES = require('../config/championNames');
+const generateRandomNumberInRange = require('./generator')
 
 class Pool {
     constructor(tierLvl) {
         this.tierLvl = tierLvl;
-        this.size = this.setSize();
         this.champions = this.setChampions();
         this.units = this.setUnits();
-    }
-
-    setSize() {
-        return POOL_SIZES.get(this.tierLvl)*CHAMPION_NAMES.get(this.tierLvl).length;
     }
 
     setChampions() {
@@ -21,6 +17,14 @@ class Pool {
             championArr.set(championName, new Champion(this.tierLvl, championName, POOL_SIZES.get(this.tierLvl)));
         }
         return championArr;
+    }
+
+    getSize() {
+        return this.units.length;
+    }
+
+    getChampion(index) {
+        return this.units[index];
     }
 
     printPool() {
@@ -87,7 +91,22 @@ class Pool {
             formattedArray.push(this.units[i].champion.name);
         }
         console.log(formattedArray);
-    }  
+    }
+
+    getRandomUnitIndex() {
+        return generateRandomNumberInRange(1, this.getSize()) - 1;
+    }
+
+    getNumberOfUnitIndexes(indexesCount) {
+        const indexes = [];
+        while (indexes.length !== indexesCount) {
+            let tmpIndex = this.getRandomUnitIndex();
+            if (!indexes.includes(tmpIndex)) {
+                indexes.push(tmpIndex);
+            }
+        }
+        return indexes;
+    }
 }
 
 module.exports = Pool;

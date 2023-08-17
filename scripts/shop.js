@@ -24,6 +24,13 @@ class Shop {
         }
     }
 
+    /**
+     * Get pool with given tier
+     */
+    getPool(tier) {
+        return this.pools[tier-1];
+    }
+
     generateTierLvl() {
         const number = generateRandomNumberInRange(1, 100)
         let counter = 0;
@@ -32,6 +39,68 @@ class Shop {
             counter += oddsTable.odds.get(i+1);
             if (number <= counter) {
                 return i + 1;
+            }
+        }
+    }
+
+    /**
+     * Get list of five champions with reference to them
+     * @returns {[[champion, pool, index], [champion, pool, index], ...]}
+     */
+    getRoll() {
+        let rollTiers = []
+        const tiersOccurrences = new Map();
+        for (let i = 0; i < 5; i++) {
+            let tmpTier = this.generateTierLvl();
+            rollTiers.push(tmpTier);
+            
+            if (tiersOccurrences.has(tmpTier)) {
+                tiersOccurrences.set(tmpTier, tiersOccurrences.get(tmpTier) + 1);
+            } else {
+                tiersOccurrences.set(tmpTier, 1);
+            }
+        }
+        
+        const championListOfGivenTier = new Map();
+        for (const [tier, count] of tiersOccurrences) {
+            let unitIndexes = this.getPool(tier).getNumberOfUnitIndexes(count);
+            console.log('unitIndexes', unitIndexes);
+
+
+            let champions = [];
+            for (const index of unitIndexes) {
+                let tmpChampion = this.getPool(tier).getChampion(index);
+                champions.push([tmpChampion, this.getPool(tier), index]);
+            }
+            championListOfGivenTier.set(tier, champions);
+        }
+        console.log('championListOfGivenTier', championListOfGivenTier);
+
+
+        // get result in the right order
+        let res = [];
+        for (const tier of rollTiers) {
+            res.push(championListOfGivenTier.get(tier).shift());
+        }
+        return res;
+    }
+
+    /**
+     * Get the number of rolls until the champion was found in the pool
+     * @returns {[rollNumber, index]} Number of rolls and index of founded champion
+     */
+    rollsToGetChampion(championName) {
+
+
+
+        let rollNumber = 0;
+        while (true) {
+            rollNumber++;
+            let indexes = this.getFiveUnitIndexes();
+            for (let i = 0; i < 5; i++) {
+                if (this.units[indexes[i]].champion.name === championName) {
+                    return [rollNumber, indexes[i]];
+                }
             }
         }
     }
