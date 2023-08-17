@@ -24,9 +24,13 @@ class Pool {
     }
 
     printPool() {
-        console.log('| ', this.tierLvl, "star Pool", "        |");
+        console.log(this.tierLvl, "star Pool");
         for ( const [championName, champion] of this.champions) {
-            console.log("|", champion.getRarity(), championName, "\t" , champion.poolCount, "  |");
+            let name = championName;
+            while (name.length < 5) {
+                name += " ";
+            }
+            console.log(champion.getRarity(), name, "\t" , champion.poolCount);
         }
         console.log();
     }
@@ -57,7 +61,6 @@ class Pool {
                 units.push(new ChampionUnit(champion));
             }
         }
-        console.log(units)
         return units;
     }
 
@@ -80,12 +83,11 @@ class Pool {
 
     printUnits() {
         const formattedArray = [];
-        const lastIndex = this.units.length - 1;
         for (let i = 0; i < this.units.length; i++) {
             formattedArray.push(this.units[i].champion.name);
         }
         console.log(formattedArray);
-    }
+    }  
 }
 
 module.exports = Pool;

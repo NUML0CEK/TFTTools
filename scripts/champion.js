@@ -1,10 +1,4 @@
-const ChampionsRarity = new Map ([
-    [1, '⚪'],
-    [2, '🟢'],
-    [3, '🔵'],
-    [4, '🟣'],
-    [5, '🟠']
-])
+const RARITY = require('../config/rarity');
 
 class Champion {
     constructor(tierLvl, name, poolCount) {
@@ -18,7 +12,7 @@ class Champion {
     }
 
     getRarity () {
-        return ChampionsRarity.get(this.tierLvl);
+        return RARITY.get(this.tierLvl);
     }
 
 }
