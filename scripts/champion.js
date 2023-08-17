@@ -1,9 +1,9 @@
-
-
-class champion {
-    constructor(cost, name, starLvl) {
-    this.cost = cost;
-    this.name = name;
+class Champion {
+    constructor(starLvl, name, poolCount) {
     this.starLvl = starLvl;
+    this.name = name;
+    this.poolCount = poolCount;
     }
 }
+
+module.exports = Champion;
