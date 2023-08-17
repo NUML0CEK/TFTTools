@@ -1,42 +1,91 @@
 const Champion = require('./champion');
+const ChampionUnit = require('./championUnit');
 const POOL_SIZES = require('../config/poolSizes');
 const CHAMPION_NAMES = require('../config/championNames');
 
 class Pool {
-    constructor(starLvl) {
-        this.starLvl = starLvl;
+    constructor(tierLvl) {
+        this.tierLvl = tierLvl;
         this.size = this.setSize();
         this.champions = this.setChampions();
-        // this.units = this.setUnits();
+        this.units = this.setUnits();
     }
 
     setSize() {
-        return POOL_SIZES.get(this.starLvl)*CHAMPION_NAMES.get(this.starLvl).length;
+        return POOL_SIZES.get(this.tierLvl)*CHAMPION_NAMES.get(this.tierLvl).length;
     }
 
     setChampions() {
         let championArr = new Map()
-        for ( const championName of CHAMPION_NAMES.get(this.starLvl) ) {
-            championArr.set(championName, new Champion(this.starLvl, championName, POOL_SIZES.get(this.starLvl)));
+        for ( const championName of CHAMPION_NAMES.get(this.tierLvl) ) {
+            championArr.set(championName, new Champion(this.tierLvl, championName, POOL_SIZES.get(this.tierLvl)));
         }
         return championArr;
     }
 
     printPool() {
-        console.log("|  ", this.starLvl, "star Pool", "      |");
+        console.log('| ', this.tierLvl, "star Pool", "        |");
         for ( const [championName, champion] of this.champions) {
-            console.log("|  ", championName, "\t" , champion.poolCount, "  |");
+            console.log("|", champion.getRarity(), championName, "\t" , champion.poolCount, "  |");
+        }
+        console.log();
+    }
+
+    setChampionPoolCount ( name, newCount) {
+        const oldCount = this.champions.get(name).poolCount;
+        if (newCount === oldCount) {
+            return;
+        } else if (newCount > oldCount) {
+            let diff = newCount - oldCount;
+            for (let i = 0; i < diff; i++) {
+                this.addChampion(name);
+            }
+        } else {
+            let diff = oldCount - newCount;
+            for (let i = 0; i < diff; i++) {
+                this.removeChampionByName(name);
+            }
+        }
+
+        this.champions.get(name).setPoolCount(newCount);
+    }
+
+    setUnits() {
+        const units = [];
+        for ( const [_, champion] of this.champions) {
+            for (let i = 0; i < POOL_SIZES.get(this.tierLvl); i++) {
+                units.push(new ChampionUnit(champion));
+            }
+        }
+        console.log(units)
+        return units;
+    }
+
+    addChampion(name) {
+        this.units.push(new ChampionUnit(this.champions.get(name)));
+    }
+
+    removeChampionByName(name) {
+        for (let i = 0; i < this.units.length; i++) {
+            if (this.units[i].champion.name === name) {
+                this.units.splice(i, 1);
+                break;
+            }
         }
     }
 
-    addChampion(champion) {
-
+    removeChampionByIndex(index) {
+        this.units.splice(index, 1);
     }
 
-    removeChampion(champion) {
-
+    printUnits() {
+        const formattedArray = [];
+        const lastIndex = this.units.length - 1;
+        for (let i = 0; i < this.units.length; i++) {
+            formattedArray.push(this.units[i].champion.name);
+        }
+        console.log(formattedArray);
     }
-
 }
 
 module.exports = Pool;

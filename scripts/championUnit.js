@@ -1,8 +1,9 @@
-import Champion from "./champion";
+const Champion = require("./champion");
 
 class ChampionUnit {
-    constructor(id, championInstance) {
-        this.id = id;
+    constructor(championInstance) {
         this.champion = championInstance;
     }
 }
+
+module.exports = ChampionUnit;
