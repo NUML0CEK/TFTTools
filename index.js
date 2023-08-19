@@ -2,18 +2,40 @@ const Pool = require('./scripts/pool');
 const Shop = require('./scripts/Shop');
 const RARITY = require('./config/rarity');
 
-// let myPool = new Pool(1);
-// myPool.printPool();
-// myPool.setChampionPoolCount("Maokai", 1);
-// myPool.printPool();
-// myPool.printUnits();
+const Simulation = require('./scripts/simulation');
+const RollingSimulator = require('./scripts/rollingSimulator');
 
-let myShop = new Shop();
-myShop.changeLevel(10);
-const roll = myShop.getRoll();
-for ([champion, _, _] of roll) {
-    console.log(champion);
-}
+// function printRoll(roll) {
+//     let rollString = "";
+//     for ([champion, _, _] of roll) {
+//         rollString += champion.champion.getRarity() + ' ' + champion.champion.name + ' ';
+//     }
+//     console.log(rollString);
+// }
+
+// let myShop = new Shop();
+// myShop.setupPools();
+// myShop.changeLevel(10);
+// const roll = myShop.getRoll();
+// printRoll(roll);
+
+let myRollingSimulator = new RollingSimulator();
+myRollingSimulator.start();
+
+
+// let championTier = 3;
+// let championName = 'Taric';
+// let shopLvl = 6;
+// let boughtChampions = 7;
+// let sameTierBoughtChampionsNumber = 170; // full lvl3 tier pool contains 234 championUnits. This pool should contain 164 - 11 = 153 dummies and 11 Tarics.
+// let golds = 10;
+// let mySimulation = new Simulation(championTier, championName, shopLvl, boughtChampions, sameTierBoughtChampionsNumber, golds);
+// let res = mySimulation.analyzeRollsToGetNumberOfChampions(6, 5000);
+// console.log(res);
+// console.log(mySimulation.rollsAvailable());
+
+// mySimulation.pool.printPool();
+// mySimulation.pool.printUnits();
 
 
 // for ( let i = 0; i < 11; i++ ) {
@@ -32,3 +54,5 @@ for ([champion, _, _] of roll) {
 
 // console.log()
 // console.log(myShop.changeLevel())
+
+

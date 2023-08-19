@@ -7,20 +7,31 @@ const generateRandomNumberInRange = require('./generator')
 class Pool {
     constructor(tierLvl) {
         this.tierLvl = tierLvl;
-        this.champions = this.setChampions();
-        this.units = this.setUnits();
+        this.champions = new Map();
+        this.units = [];
     }
 
     setChampions() {
-        let championArr = new Map()
+        let championMap = new Map()
         for ( const championName of CHAMPION_NAMES.get(this.tierLvl) ) {
-            championArr.set(championName, new Champion(this.tierLvl, championName, POOL_SIZES.get(this.tierLvl)));
+            championMap.set(championName, new Champion(this.tierLvl, championName, POOL_SIZES.get(this.tierLvl)));
         }
-        return championArr;
+        this.champions = championMap;
     }
 
     getSize() {
         return this.units.length;
+    }
+
+    getFullSizePoolChampionCount() {
+        return CHAMPION_NAMES.get(this.tierLvl).length * POOL_SIZES.get(this.tierLvl);
+    }
+
+    /**
+     * Gives number of champion which should be in the pool based on number of bought champions currently off the pool
+     */
+    getRemainingNumberOfChampions(boughtChampions) {
+        return POOL_SIZES.get(this.tierLvl) - boughtChampions;
     }
 
     getChampion(index) {
@@ -46,7 +57,7 @@ class Pool {
         } else if (newCount > oldCount) {
             let diff = newCount - oldCount;
             for (let i = 0; i < diff; i++) {
-                this.addChampion(name);
+                this.addChampionToUnits(name);
             }
         } else {
             let diff = oldCount - newCount;
@@ -65,10 +76,25 @@ class Pool {
                 units.push(new ChampionUnit(champion));
             }
         }
-        return units;
+        this.units = units;
     }
 
-    addChampion(name) {
+    /**
+     * Add number of given champion to the units and to the champion
+     */
+    addChampions(name, count) {
+        const champion = new Champion(this.tierLvl, name, count);
+        this.champions.set(name, champion);
+        for (let i = 0; i < count; i++) {
+            this.units.push(new ChampionUnit(champion));
+        }  
+    }
+
+    fillUnitsWithDummies( numberOfDummies) {
+        this.addChampions('dummy', numberOfDummies);
+    }
+
+    addChampionToUnits(name) {
         this.units.push(new ChampionUnit(this.champions.get(name)));
     }
 
@@ -82,7 +108,9 @@ class Pool {
     }
 
     removeChampionByIndex(index) {
-        this.units.splice(index, 1);
+        let championUnit = this.units.splice(index, 1);
+        
+        championUnit.champion.poolCount--;
     }
 
     printUnits() {

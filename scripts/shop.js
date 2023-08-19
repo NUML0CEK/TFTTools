@@ -4,7 +4,6 @@
 // const CHAMPION_NAMES = require('../config/championNames');
 
 const generateRandomNumberInRange = require('./generator')
-const SHOP_ODDS = require('../config/shopOdds');
 const Pool = require('./pool');
 const SHOP_ODDS_TABLE = require('../config/shopOdds');
 
@@ -13,8 +12,14 @@ class Shop {
     constructor() {
         this.level = 1;
         this.pools = [];
+    }
+
+    setupPools() {
         for (let i = 0; i < 5; i++) {
-            this.pools.push(new Pool(i+1));
+            let pool = new Pool(i+1);
+            pool.setChampions();
+            pool.setUnits();
+            this.pools.push(pool);
         }
     }
 
@@ -64,7 +69,6 @@ class Shop {
         const championListOfGivenTier = new Map();
         for (const [tier, count] of tiersOccurrences) {
             let unitIndexes = this.getPool(tier).getNumberOfUnitIndexes(count);
-            console.log('unitIndexes', unitIndexes);
 
 
             let champions = [];
@@ -74,7 +78,6 @@ class Shop {
             }
             championListOfGivenTier.set(tier, champions);
         }
-        console.log('championListOfGivenTier', championListOfGivenTier);
 
 
         // get result in the right order
@@ -85,26 +88,9 @@ class Shop {
         return res;
     }
 
-    /**
-     * Get the number of rolls until the champion was found in the pool
-     * @returns {[rollNumber, index]} Number of rolls and index of founded champion
-     */
-    rollsToGetChampion(championName) {
-
-
-
-        let rollNumber = 0;
-        while (true) {
-            rollNumber++;
-            let indexes = this.getFiveUnitIndexes();
-            for (let i = 0; i < 5; i++) {
-                if (this.units[indexes[i]].champion.name === championName) {
-                    return [rollNumber, indexes[i]];
-                }
-            }
-        }
+    buyChampion(pool, index) {
+        pool.removeChampionByIndex(index);
     }
-
 }
 
 module.exports = Shop;
