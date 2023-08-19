@@ -23,16 +23,15 @@ let myRollingSimulator = new RollingSimulator();
 myRollingSimulator.start();
 
 
-// let championTier = 3;
-// let championName = 'Taric';
-// let shopLvl = 6;
-// let boughtChampions = 7;
-// let sameTierBoughtChampionsNumber = 170; // full lvl3 tier pool contains 234 championUnits. This pool should contain 164 - 11 = 153 dummies and 11 Tarics.
-// let golds = 10;
-// let mySimulation = new Simulation(championTier, championName, shopLvl, boughtChampions, sameTierBoughtChampionsNumber, golds);
-// let res = mySimulation.analyzeRollsToGetNumberOfChampions(6, 5000);
-// console.log(res);
-// console.log(mySimulation.rollsAvailable());
+let championTier = 3;
+let championName = 'Taric';
+let shopLvl = 7;
+let boughtChampions = 0;
+let sameTierBoughtChampionsNumber = 0; // full lvl3 tier pool contains 234 championUnits. This pool should contain 164 - 11 = 153 dummies and 11 Tarics.
+let golds = 50;
+let mySimulation = new Simulation(championTier, championName, shopLvl, boughtChampions, sameTierBoughtChampionsNumber, golds);
+let res = mySimulation.analyzeRollsToGetNumberOfChampions(6, 5000);
+console.log(res);
 
 // mySimulation.pool.printPool();
 // mySimulation.pool.printUnits();

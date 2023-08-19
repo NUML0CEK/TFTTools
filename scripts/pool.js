@@ -110,7 +110,7 @@ class Pool {
     removeChampionByIndex(index) {
         let championUnit = this.units.splice(index, 1);
         
-        championUnit.champion.poolCount--;
+        championUnit[0].champion.poolCount -= 1;
     }
 
     printUnits() {

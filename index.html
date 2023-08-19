@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graf</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div style="width: 80%; margin: 0 auto;">
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+
+    <script>
+        // Data pro graf
+        const data = {
+            labels: ['Jan', 'Feb', 'Mar'],
+            datasets: [{
+                label: 'Měsíční tržby',
+                data: [1000, 1200, 800, 1500, 2000],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)', // Barva sloupců
+                borderColor: 'rgba(75, 192, 192, 1)', // Barva ohraničení sloupců
+                borderWidth: 1 // Šířka ohraničení sloupců
+            }]
+        };
+
+        // Nastavení grafu
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar', // Typ grafu (sloupcový graf)
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true // Začít na osě Y od nuly
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -6,13 +6,6 @@ const rl = readline.createInterface({
     output: process.stdout
   });
   
-  rl.question('Zadejte něco: ', (userInput) => {
-    // Vstup od uživatele je uložen v proměnné userInput
-    console.log('Uživatel zadal: ' + userInput);
-  
-    // Ukončení čtení vstupu
-    rl.close();
-  });
 
 class RollingSimulator {
     constructor() {
@@ -26,27 +19,45 @@ class RollingSimulator {
 
     printRoll(roll) {
         let rollString = "";
-        for ([champion, _, _] of roll) {
+        for (const [champion, pool, index] of roll) {
             rollString += champion.champion.getRarity() + ' ' + champion.champion.name + ' ';
         }
         console.log(rollString);
     }
 
-    start() { // nefunguje ...
-        while(true) {
-
-            rl.question('', (input) => {
-                if (input === '') {
-                    console.log('nic nebylo zadano');
-                } else {
-                    console.log(input);
-                }
-
+    start() {
+        rl.question('', (input) => {
+            if (input === 'q') {
+                console.log('GG!');
                 rl.close();
-            })
-
-
-        }
+                return;
+            } else if (input.startsWith('buy ') ) {
+                const substring = input.substring(4);
+                for(const [champion, pool, index] of this.roll) {
+                    if (substring === champion.champion.name) {
+                        this.myShop.buyChampion(pool, index);
+                        console.log(substring, 'bought!');
+                    }
+                }
+            } else if (input.startsWith('stats ')) {
+                const substring = input.substring(6);
+                const tier = parseInt(substring);
+                if (typeof tier === 'number') {
+                    this.myShop.getPool(tier).printPool();
+                    this.myShop.getPool(tier).printUnits();
+                }
+            } else if (input.startsWith('lvl ')){
+                const substring = input.substring(4);
+                const lvl = parseInt(substring);
+                if (typeof lvl === 'number') {
+                    this.changeLvl(lvl);
+                }
+            } else {
+                this.roll = this.myShop.getRoll();
+                this.printRoll(this.roll);
+            }
+            this.start();
+        })
     }
 
 }
