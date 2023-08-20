@@ -11,5 +11,8 @@
     "url": "https://gitlab.fit.cvut.cz/svatejak/tftrollingsimulator.git"
   },
   "author": "Jakub Svatek",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "fomantic-ui": "^2.9.2"
+  }
 }
