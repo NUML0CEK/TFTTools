@@ -1,10 +1,11 @@
-const Champion = require('./champion');
-const ChampionUnit = require('./championUnit');
-const POOL_SIZES = require('../config/poolSizes');
-const CHAMPION_NAMES = require('../config/championNames');
-const generateRandomNumberInRange = require('./generator')
+import {Champion} from './champion.js';
+import {ChampionUnit} from './championUnit.js';
+import {POOL_SIZES} from '../config/poolSizes.js';
+import {CHAMPION_NAMES} from '../config/championNames.js';
+import {generateRandomNumberInRange} from './generator.js';
 
-class Pool {
+
+export class Pool {
     constructor(tierLvl) {
         this.tierLvl = tierLvl;
         this.champions = new Map();
@@ -136,5 +137,3 @@ class Pool {
         return indexes;
     }
 }
-
-module.exports = Pool;

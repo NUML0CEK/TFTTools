@@ -1,6 +1,6 @@
-const RARITY = require('../config/rarity');
+import {RARITY} from '../config/rarity.js';
 
-class Champion {
+export class Champion {
     constructor(tierLvl, name, poolCount) {
         this.tierLvl = tierLvl;
         this.name = name;
@@ -15,5 +15,3 @@ class Champion {
         return RARITY.get(this.tierLvl);
     }
 }
-
-module.exports = Champion;

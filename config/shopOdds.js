@@ -10,7 +10,7 @@ class ShopOdds {
     }
 }
 
-const SHOP_ODDS_TABLE = new Map([
+export const SHOP_ODDS_TABLE = new Map([
     [1, new ShopOdds(100, 0, 0, 0, 0)],
     [2, new ShopOdds(100, 0, 0, 0, 0)],
     [3, new ShopOdds(75, 25, 0, 0, 0)],
@@ -23,5 +23,3 @@ const SHOP_ODDS_TABLE = new Map([
     [10, new ShopOdds(5, 10, 20, 40, 25)],
     [11, new ShopOdds(1, 2, 12, 50, 35)],
 ]);
-
-module.exports = SHOP_ODDS_TABLE;

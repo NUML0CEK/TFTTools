@@ -1,4 +1,4 @@
-const POOL_SIZES = new Map([
+export const POOL_SIZES = new Map([
     // [1, 29],
     [1, 2],
     [2, 22],
@@ -6,5 +6,3 @@ const POOL_SIZES = new Map([
     [4, 12],
     [5, 10]
 ]);
-
-module.exports = POOL_SIZES;

@@ -1,14 +1,8 @@
-// const Champion = require('./champion');
-// const ChampionUnit = require('./championUnit');
-// const POOL_SIZES = require('../config/poolSizes');
-// const CHAMPION_NAMES = require('../config/championNames');
+import {generateRandomNumberInRange} from './generator.js';
+import {Pool} from './pool.js';
+import {SHOP_ODDS_TABLE} from '../config/shopOdds.js';
 
-const generateRandomNumberInRange = require('./generator')
-const Pool = require('./pool');
-const SHOP_ODDS_TABLE = require('../config/shopOdds');
-
-
-class Shop {
+export class Shop {
     constructor() {
         this.level = 1;
         this.pools = [];
@@ -92,5 +86,3 @@ class Shop {
         pool.removeChampionByIndex(index);
     }
 }
-
-module.exports = Shop;

@@ -1,9 +1,6 @@
-const Shop = require('./shop');
-const POOL_SIZES = require('../config/poolSizes');
-const CHAMPION_NAMES = require('../config/championNames');
-const Pool = require('./pool');
-const generateRandomNumberInRange = require('./generator')
-
+import {Shop} from './shop.js';
+import {Pool} from './pool.js';
+import {generateRandomNumberInRange} from './generator.js';
 
 class PlaceHolderPool extends Pool{
     constructor(tier) {
@@ -29,7 +26,7 @@ class PlaceHolderPool extends Pool{
     }
 }
 
-class Simulation {
+export class Simulation {
     constructor(championTier, shopLvl, boughtChampions, sameTierBoughtChampionsNumber, gold) {
         this.shopLvl = shopLvl;
         this.gold = gold;
@@ -151,5 +148,3 @@ class Simulation {
     }
 
 }
-
-module.exports = Simulation;

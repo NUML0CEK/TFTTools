@@ -1,5 +1,6 @@
-const Shop = require('./Shop');
-const readline = require('readline');
+import {Shop} from './shop.js';
+import {readline} from readline;
+
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -7,7 +8,7 @@ const rl = readline.createInterface({
   });
   
 
-class RollingSimulator {
+export class RollingSimulator {
     constructor() {
         this.myShop = new Shop();
         this.myShop.setupPools();
@@ -60,8 +61,3 @@ class RollingSimulator {
         })
     }
 }
-
-
-
-
-module.exports = RollingSimulator;

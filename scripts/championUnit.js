@@ -1,9 +1,5 @@
-const Champion = require("./champion");
-
-class ChampionUnit {
+export class ChampionUnit {
     constructor(championInstance) {
         this.champion = championInstance;
     }
 }
-
-module.exports = ChampionUnit;
