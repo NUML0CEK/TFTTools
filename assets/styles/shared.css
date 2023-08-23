@@ -155,14 +155,55 @@
   }
 
   .ui.button {
+    background-color: rgb(165, 228, 233);
+  }
+
+  .ui.mainMenu.button {
     width: 100%;
     border-radius: 100px;
     margin: 25px;
     height: 100px;
-    background-color: rgb(165, 228, 233)
   }
 
-  /* a > div.header.item {
-    color:rgb(12, 117, 117)
-  } */
+  .ui.two.columns.stackable.grid {
+    margin-right: 500px;
+    margin-left: 500px;
+    margin-top: 100px;
+}
 
+.ui.two.columns.stackable.grid .content {
+    width: 100%;
+    max-width: calc(100% - 600px);
+    margin: 0 auto;
+}
+
+.field {
+    width:10%;
+}
+
+.ui.dropdown.custom-background {
+    background-color: rgb(165, 228, 233)
+}
+
+.ui.inverted.form input.custom-background {
+    background-color: rgb(165, 228, 233);
+}
+
+.ui.checkbox label, .ui.inverted.form label {
+    color: black;
+    margin-bottom: 0px;
+}
+
+.field input.custom-background::placeholder {
+    color: black;
+}
+
+/* .ui.two.columns.stackable.grid > .oddForm{
+    background-color: rgba(253, 238, 80, 0.13);
+} */
+
+.ui.submit.button {
+    background-color: rgb(169, 250, 149);
+    margin-left: 242px;
+    margin-top: 5px;
+}

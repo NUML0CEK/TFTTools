@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>TFT Tools</title>
         <!-- <link rel="stylesheet" href="./semantic.min.css"> -->
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script> -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css">
         <link rel="stylesheet" href="../assets/styles/shared.css">
     </head>
@@ -15,7 +16,65 @@
             <a href="../index.html" class="header item">TFT Tools</a>
         </div>
 
-        <div class="spacer"></div>
+        <div class="ui two columns stackable grid">
+            <!-- User input -->
+            <div class="column oddForm">
+                <div class="ui inverted form">
+                    <div class="three fields">
+                        <div class="field">
+                            <input type="hidden" name="Tier">
+                            <label>Tier</label>
+                            <select id="tier" class="ui dropdown custom-background">
+                                <option value="" disabled selected>Tier</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <input type="hidden" name="shopLvl">
+                            <label>Lvl</label>
+                            <select id="shopLvl" class="ui dropdown custom-background">
+                                <option value="" disabled selected>Lvl</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label>Gold</label>
+                            <input id="gold" class="custom-background" type="text" placeholder="Gold">
+                        </div>
+                    </div>
+                    <div class="two fields">
+                        <div class="field">
+                            <label>Tier champions bought</label>
+                            <input id="tierChampionsBought" class="custom-background" type="text" placeholder="Tier champions bought">
+                        </div>
+                        <div class="field">
+                            <label>Champions bought</label>
+                            <input id="championsBought" class="custom-background" type="text" placeholder="Champions bought">
+                        </div>
+                    </div>
 
-    </body>
+                    <div id="calcButton" class="ui submit button">Calculate</div>
+                        
+                    </button>
+            </div>
+        </div>
+        <div class="column">
+            NECO DALSIHO
+        </div>
+
+        <script type="module" src="../scripts/htmlScripts/oddsCalculator.js"></script>
 </html>

@@ -59,7 +59,9 @@ class RollingSimulator {
             this.start();
         })
     }
-
 }
+
+
+
 
 module.exports = RollingSimulator;

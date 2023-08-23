@@ -30,7 +30,7 @@ class PlaceHolderPool extends Pool{
 }
 
 class Simulation {
-    constructor(championTier, championName, shopLvl, boughtChampions, sameTierBoughtChampionsNumber, gold) {
+    constructor(championTier, shopLvl, boughtChampions, sameTierBoughtChampionsNumber, gold) {
         this.shopLvl = shopLvl;
         this.gold = gold;
 
