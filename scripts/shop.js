@@ -30,6 +30,10 @@ export class Shop {
         return this.pools[tier-1];
     }
 
+    getShopOddsTable() {
+        return SHOP_ODDS_TABLE.get(this.level);
+    }
+
     generateTierLvl() {
         const number = generateRandomNumberInRange(1, 100)
         let counter = 0;

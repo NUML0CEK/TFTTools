@@ -13,6 +13,7 @@
   "author": "Jakub Svatek",
   "license": "ISC",
   "dependencies": {
+    "chart.js": "^4.3.3",
     "fomantic-ui": "^2.9.2"
   }
 }

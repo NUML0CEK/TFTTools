@@ -30,6 +30,7 @@ export class Simulation {
     constructor(championTier, shopLvl, boughtChampions, sameTierBoughtChampionsNumber, gold) {
         this.shopLvl = shopLvl;
         this.gold = gold;
+        this.tier = championTier;
 
         this.pool = new PlaceHolderPool(championTier);
         this.pool.setPlaceHolderPool(boughtChampions, sameTierBoughtChampionsNumber);
@@ -136,6 +137,18 @@ export class Simulation {
         if (upperLimitOfChampions > this.pool.championsInThePool) {
             upperLimitOfChampions = this.pool.championsInThePool;
         }
+
+        let shopOddsTable = this.shop.getShopOddsTable();
+        for (const [tier, odd] of shopOddsTable.odds) {
+            console.log(this.tier, tier);
+            if (this.tier === tier) {
+                console.log('odd:', odd);
+                if (odd === 0) {
+                    return "LOW LEVEL";
+                }
+            }
+        }
+
 
         let matchesToRollsRes = new Map();
         let matchesTimes = this.initializeMatchesTimes(upperLimitOfChampions); // tracking number of times in which the needed amount of champions was found

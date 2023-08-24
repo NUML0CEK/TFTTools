@@ -8,7 +8,8 @@
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script> -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css">
         <link rel="stylesheet" href="../assets/styles/shared.css">
-        <link rel="icon" href="../../assets/images/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon" />
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
     </head>
 
     <body class="inverted">
@@ -69,12 +70,11 @@
                     </div>
 
                     <div id="calcButton" class="ui submit button">Calculate</div>
-                        
-                    </button>
             </div>
         </div>
         <div class="column">
-            NECO DALSIHO
+            <div id="rollChart"></div>
+            <div id="oddChart"></div>
         </div>
 
         <script type="module" src="../scripts/htmlScripts/oddsCalculator.js"></script>
